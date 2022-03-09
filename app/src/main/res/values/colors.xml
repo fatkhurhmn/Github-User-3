@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="prussian_blue_dark">#000720</color>
+    <color name="prussian_blue">#023047</color>
+    <color name="prussian_blue_light">#365973</color>
+    <color name="cornflower_dark">#5D99D4</color>
+    <color name="cornflower">#8ECAE6</color>
+    <color name="cornflower_light">#C1FDFF</color>
 </resources>
