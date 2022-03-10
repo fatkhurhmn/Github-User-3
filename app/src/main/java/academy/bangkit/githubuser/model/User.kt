@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class User(
 
     @field:SerializedName("login")
-    val login: String = "",
+    val username: String = "",
 
     @field:SerializedName("id")
     val id: Int = 0,
