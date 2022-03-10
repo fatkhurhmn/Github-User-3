@@ -15,6 +15,7 @@
     </style>
 
     <style name="Text">
+        <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -47,6 +48,11 @@
     <style name="SearchView" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="fontFamily">@font/poppins_regular</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="HelperLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
     </style>
 
 </resources>

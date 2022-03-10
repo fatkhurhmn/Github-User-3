@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GitHub User</string>
+    <string name="username">Username</string>
+    <string name="id_user">ID User</string>
 </resources>
