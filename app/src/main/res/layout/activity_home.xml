@@ -19,6 +19,7 @@
             app:titleTextColor="@color/white" />
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -36,12 +37,25 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_users"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/user_item"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/user_item" />
+
+        <TextView
+            android:id="@+id/tv_hide_to_type"
+            style="@style/Text.Value.Medium.Small"
+            android:gravity="center"
+            android:text="@string/to_type"
+            app:drawableBottomCompat="@drawable/ic_type"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

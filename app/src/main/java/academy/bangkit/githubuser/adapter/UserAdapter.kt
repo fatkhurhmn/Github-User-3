@@ -1,7 +1,9 @@
 package academy.bangkit.githubuser.adapter
 
+import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.databinding.UserItemBinding
 import academy.bangkit.githubuser.model.User
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -12,6 +14,15 @@ import com.bumptech.glide.request.RequestOptions
 class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
 
     private var listUsers = ArrayList<User>()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setUser(listUsers: ArrayList<User>) {
+        with(this.listUsers) {
+            clear()
+            addAll(listUsers)
+        }
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapter.ListViewHolder {
         val userItemBinding =
@@ -30,7 +41,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
         fun bind(user: User) {
             with(binding) {
                 tvItemUsername.text = user.username
-                tvItemId.text = user.id.toString()
+                tvItemId.text = itemView.resources.getString(R.string.id_user, user.id.toString())
                 imgItemPhoto.loadImage(user.avatarUrl)
             }
         }

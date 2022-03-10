@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/tv_item_username"
-        style="@style/Text.Value.Medium.Big"
+        style="@style/Text.Value.Medium.Small"
         android:text="@string/username"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/helper_line1"
