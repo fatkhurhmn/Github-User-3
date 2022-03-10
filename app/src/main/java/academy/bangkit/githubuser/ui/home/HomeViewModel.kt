@@ -1,0 +1,62 @@
+package academy.bangkit.githubuser.ui.home
+
+import academy.bangkit.githubuser.BuildConfig
+import academy.bangkit.githubuser.model.SearchResponse
+import academy.bangkit.githubuser.model.User
+import academy.bangkit.githubuser.network.ApiConfig
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class HomeViewModel : ViewModel() {
+    private val tokenApi = BuildConfig.API_KEY
+    private val listUsers = MutableLiveData<ArrayList<User>>()
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+    private val _isError = MutableLiveData<Boolean>()
+    val isError: LiveData<Boolean> get() = _isError
+
+    private val _isNoResult = MutableLiveData<Boolean>()
+    val isNoResult: LiveData<Boolean> get() = _isNoResult
+
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> get() = _message
+
+    fun setListUsers(username: String) {
+        _isLoading.postValue(true)
+
+        val client = ApiConfig.getApiService().getSearchUsers(username, tokenApi)
+        client.enqueue(object : Callback<SearchResponse> {
+            override fun onResponse(
+                call: Call<SearchResponse>,
+                response: Response<SearchResponse>
+            ) {
+                _isLoading.postValue(false)
+                if (response.isSuccessful) {
+                    _isError.postValue(false)
+                    response.body()?.users?.apply {
+                        _isNoResult.postValue(isEmpty())
+                        listUsers.postValue(this as ArrayList<User>)
+                    }
+                } else {
+                    _isError.postValue(true)
+                    _message.postValue(response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+                _isError.postValue(true)
+                _message.postValue(t.message)
+            }
+        })
+    }
+
+    fun getListUsers(): LiveData<ArrayList<User>> {
+        return listUsers
+    }
+}
