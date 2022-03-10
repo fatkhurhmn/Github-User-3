@@ -34,7 +34,6 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
                 imgItemPhoto.loadImage(user.avatarUrl)
             }
         }
-
     }
 
     fun ImageView.loadImage(url: String) {
