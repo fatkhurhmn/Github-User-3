@@ -24,6 +24,7 @@ class HomeActivity : AppCompatActivity() {
         initListUsers()
         showListUsers()
         hideToTypeIcon()
+        showLoading()
     }
 
     private fun searchUser() {
@@ -62,9 +63,23 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun hideToTypeIcon() {
-        homeViewModel.isLoading.observe(this) { isLoading ->
+        homeViewModel.isTyped.observe(this) { isLoading ->
             if (isLoading) {
                 binding.tvHideToType.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showLoading() {
+        homeViewModel.isLoading.observe(this) { isLoading ->
+            with(binding) {
+                if (isLoading) {
+                    viewSearchLoading.root.visibility = View.VISIBLE
+                    rvListUsers.visibility = View.GONE
+                } else {
+                    viewSearchLoading.root.visibility = View.GONE
+                    rvListUsers.visibility = View.VISIBLE
+                }
             }
         }
     }

@@ -24,11 +24,15 @@ class HomeViewModel : ViewModel() {
     private val _isNoResult = MutableLiveData<Boolean>()
     val isNoResult: LiveData<Boolean> get() = _isNoResult
 
+    private val _isTyped = MutableLiveData<Boolean>()
+    val isTyped: LiveData<Boolean> get() = _isTyped
+
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> get() = _message
 
     fun setListUsers(username: String) {
         _isLoading.postValue(true)
+        _isTyped.postValue(true)
 
         val client = ApiConfig.getApiService().getSearchUsers(username, tokenApi)
         client.enqueue(object : Callback<SearchResponse> {
