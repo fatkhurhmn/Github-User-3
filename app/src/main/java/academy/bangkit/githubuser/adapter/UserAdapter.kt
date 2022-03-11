@@ -50,7 +50,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
     fun ImageView.loadImage(url: String) {
         Glide.with(this.context)
             .load(url)
-            .apply(RequestOptions().override(500, 500))
+            .apply(RequestOptions().override(500, 500).placeholder(R.drawable.ic_default_photo))
             .centerCrop()
             .into(this)
     }
