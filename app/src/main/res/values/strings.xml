@@ -3,4 +3,5 @@
     <string name="username">Username</string>
     <string name="id_user">Id: %s</string>
     <string name="to_type">Type in the search field</string>
+    <string name="no_results">No results</string>
 </resources>

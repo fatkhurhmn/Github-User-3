@@ -49,6 +49,7 @@
         <TextView
             android:id="@+id/tv_hide_to_type"
             style="@style/Text.Value.Medium.Small"
+            android:layout_marginStart="0dp"
             android:gravity="center"
             android:text="@string/to_type"
             app:drawableBottomCompat="@drawable/ic_type"
@@ -60,6 +61,11 @@
         <include
             android:id="@+id/view_search_loading"
             layout="@layout/view_list_loading"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/view_no_results"
+            layout="@layout/view_no_results"
             android:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

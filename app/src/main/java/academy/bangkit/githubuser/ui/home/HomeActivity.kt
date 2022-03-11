@@ -25,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
         showListUsers()
         hideToTypeIcon()
         showLoading()
+        showNoResult()
     }
 
     private fun searchUser() {
@@ -76,8 +77,23 @@ class HomeActivity : AppCompatActivity() {
                 if (isLoading) {
                     viewSearchLoading.root.visibility = View.VISIBLE
                     rvListUsers.visibility = View.GONE
+                    viewNoResults.root.visibility = View.GONE
                 } else {
                     viewSearchLoading.root.visibility = View.GONE
+                    rvListUsers.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun showNoResult() {
+        homeViewModel.isNoResult.observe(this) { isNoResult ->
+            with(binding) {
+                if (isNoResult) {
+                    viewNoResults.root.visibility = View.VISIBLE
+                    rvListUsers.visibility = View.GONE
+                } else {
+                    viewNoResults.root.visibility = View.GONE
                     rvListUsers.visibility = View.VISIBLE
                 }
             }
