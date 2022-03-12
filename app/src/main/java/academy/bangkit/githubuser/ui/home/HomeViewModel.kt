@@ -4,6 +4,7 @@ import academy.bangkit.githubuser.BuildConfig
 import academy.bangkit.githubuser.model.SearchResponse
 import academy.bangkit.githubuser.model.User
 import academy.bangkit.githubuser.network.ApiConfig
+import academy.bangkit.githubuser.utils.Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,8 +28,8 @@ class HomeViewModel : ViewModel() {
     private val _isTyped = MutableLiveData<Boolean>()
     val isTyped: LiveData<Boolean> get() = _isTyped
 
-    private val _message = MutableLiveData<String>()
-    val message: LiveData<String> get() = _message
+    private val _message = MutableLiveData<Event<String>>()
+    val message: LiveData<Event<String>> get() = _message
 
     fun setListUsers(username: String) {
         _isLoading.postValue(true)
@@ -49,13 +50,13 @@ class HomeViewModel : ViewModel() {
                     }
                 } else {
                     _isError.postValue(true)
-                    _message.postValue(response.message())
+                    _message.postValue(Event(response.message()))
                 }
             }
 
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                 _isError.postValue(true)
-                _message.postValue(t.message)
+                _message.postValue(Event(t.message!!))
             }
         })
     }

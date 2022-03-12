@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
 
@@ -27,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
         showLoading()
         showNoResult()
         showError()
+        showMessage()
     }
 
     private fun searchUser() {
@@ -111,6 +113,14 @@ class HomeActivity : AppCompatActivity() {
                 } else {
                     viewError.root.visibility = View.GONE
                 }
+            }
+        }
+    }
+
+    private fun showMessage() {
+        homeViewModel.message.observe(this) {
+            it.getContentIfNotHandled()?.let { message ->
+                Snackbar.make(binding.homeContainer, message, Snackbar.LENGTH_SHORT).show()
             }
         }
     }
