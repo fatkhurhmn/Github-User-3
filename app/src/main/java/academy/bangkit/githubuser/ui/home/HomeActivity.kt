@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
         hideToTypeIcon()
         showLoading()
         showNoResult()
+        showError()
     }
 
     private fun searchUser() {
@@ -78,6 +79,7 @@ class HomeActivity : AppCompatActivity() {
                     viewSearchLoading.root.visibility = View.VISIBLE
                     rvListUsers.visibility = View.GONE
                     viewNoResults.root.visibility = View.GONE
+                    viewError.root.visibility = View.GONE
                 } else {
                     viewSearchLoading.root.visibility = View.GONE
                     rvListUsers.visibility = View.VISIBLE
@@ -94,7 +96,20 @@ class HomeActivity : AppCompatActivity() {
                     rvListUsers.visibility = View.GONE
                 } else {
                     viewNoResults.root.visibility = View.GONE
-                    rvListUsers.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun showError() {
+        homeViewModel.isError.observe(this) { isError ->
+            with(binding) {
+                if (isError) {
+                    viewError.root.visibility = View.VISIBLE
+                    viewSearchLoading.root.visibility = View.GONE
+                    rvListUsers.visibility = View.GONE
+                } else {
+                    viewError.root.visibility = View.GONE
                 }
             }
         }

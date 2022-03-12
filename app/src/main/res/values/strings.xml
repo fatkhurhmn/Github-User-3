@@ -4,4 +4,5 @@
     <string name="id_user">Id: %s</string>
     <string name="to_type">Type in the search field</string>
     <string name="no_results">No results found</string>
+    <string name="there_is_an_error">There is an error</string>
 </resources>
