@@ -6,11 +6,12 @@
     android:gravity="center">
 
     <TextView
-        style="@style/Text.Value.Medium.Small"
+
+        style="@style/Text.Value.Medium.Big"
         android:layout_marginStart="0dp"
         android:gravity="center"
         android:text="@string/no_results"
-        app:drawableBottomCompat="@drawable/ic_no_results" />
+        app:drawableTopCompat="@drawable/ic_no_results" />
 
 </LinearLayout>
 

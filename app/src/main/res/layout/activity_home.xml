@@ -48,11 +48,11 @@
 
         <TextView
             android:id="@+id/tv_hide_to_type"
-            style="@style/Text.Value.Medium.Small"
+            style="@style/Text.Value.Medium.Big"
             android:layout_marginStart="0dp"
             android:gravity="center"
             android:text="@string/to_type"
-            app:drawableBottomCompat="@drawable/ic_type"
+            app:drawableTopCompat="@drawable/ic_type"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
