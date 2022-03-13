@@ -14,6 +14,8 @@ import com.bumptech.glide.request.RequestOptions
 class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
 
     private var listUsers = ArrayList<User>()
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
 
     @SuppressLint("NotifyDataSetChanged")
     fun setUser(listUsers: ArrayList<User>) {
@@ -24,6 +26,10 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapter.ListViewHolder {
         val userItemBinding =
             UserItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,7 +37,11 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: UserAdapter.ListViewHolder, position: Int) {
-        holder.bind(listUsers[position])
+        val user = listUsers[position]
+        holder.bind(user)
+        holder.itemView.setOnClickListener {
+            onItemClickCallback.onItemClicked(user)
+        }
     }
 
     override fun getItemCount() = listUsers.size
@@ -53,5 +63,9 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
             .apply(RequestOptions().override(500, 500).placeholder(R.drawable.ic_default_photo))
             .centerCrop()
             .into(this)
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(user: User)
     }
 }

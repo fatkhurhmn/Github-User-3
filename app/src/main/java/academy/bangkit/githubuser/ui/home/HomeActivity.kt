@@ -2,6 +2,10 @@ package academy.bangkit.githubuser.ui.home
 
 import academy.bangkit.githubuser.adapter.UserAdapter
 import academy.bangkit.githubuser.databinding.ActivityHomeBinding
+import academy.bangkit.githubuser.model.User
+import academy.bangkit.githubuser.model.UserDetail
+import academy.bangkit.githubuser.ui.detail.UserDetailActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -24,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
         searchUser()
         initListUsers()
         showListUsers()
+        navigateToUserDetail()
         hideToTypeIcon()
         showLoading()
         showNoResult()
@@ -64,6 +69,16 @@ class HomeActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             adapter = userAdapter
         }
+    }
+
+    private fun navigateToUserDetail() {
+        userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
+            override fun onItemClicked(user: User) {
+                val userDetailIntent = Intent(this@HomeActivity, UserDetailActivity::class.java)
+                userDetailIntent.putExtra(UserDetailActivity.EXTRA_USERNAME, user.username)
+                startActivity(userDetailIntent)
+            }
+        })
     }
 
     private fun hideToTypeIcon() {
