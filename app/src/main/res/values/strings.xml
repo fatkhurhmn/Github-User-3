@@ -5,4 +5,10 @@
     <string name="to_type">Type in the search field</string>
     <string name="no_results">No results found</string>
     <string name="there_is_an_error">There is an error</string>
+    <string name="name">Name</string>
+    <string name="description">No description</string>
+    <string name="follower">Followers</string>
+    <string name="following">Following</string>
+    <string name="repository">Repository</string>
+    <string name="number">100</string>
 </resources>
