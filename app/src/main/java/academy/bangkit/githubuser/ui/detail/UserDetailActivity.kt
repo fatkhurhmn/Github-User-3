@@ -44,9 +44,9 @@ class UserDetailActivity : AppCompatActivity() {
         userDetailViewModel.getUserDetail().observe(this) { user ->
             with(binding) {
                 detailTvName.text = user.name
-                detailTvFollowers.text = user.followers.toString()
-                detailTvFollowing.text = user.following.toString()
-                detailTvRepository.text = user.publicRepos.toString()
+                detailTvFollowers.text = getFormattedNumber(user.followers)
+                detailTvFollowing.text = getFormattedNumber(user.following)
+                detailTvRepository.text = getFormattedNumber(user.publicRepos)
 
                 val description = StringBuilder().apply {
                     with(user) {
@@ -77,6 +77,23 @@ class UserDetailActivity : AppCompatActivity() {
             .apply(RequestOptions().override(500, 500).placeholder(R.drawable.ic_default_photo))
             .centerCrop()
             .into(this)
+    }
+
+    private fun getFormattedNumber(number: Int): String {
+        val numberString = when {
+            number / 1_0000 >= 1 -> {
+                val count = number / 1_000
+                String.format("%d%s", count, "K")
+            }
+            number / 1_000_000 >= 1 -> {
+                val count = number / 1_000_000
+                String.format("%d%s", count, "M")
+            }
+            else -> {
+                number.toString()
+            }
+        }
+        return numberString
     }
 
     companion object {
