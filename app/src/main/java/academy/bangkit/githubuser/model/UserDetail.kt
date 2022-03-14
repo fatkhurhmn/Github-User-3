@@ -23,11 +23,11 @@ data class UserDetail(
     val following: Int = 0,
 
     @field:SerializedName("blog")
-    val blog: String = "",
+    val blog: String? = "",
 
     @field:SerializedName("company")
-    val company: String = "",
+    val company: String? = "",
 
     @field:SerializedName("location")
-    val location: String = "",
+    val location: String? = "",
 ) : Parcelable
