@@ -24,6 +24,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/container_user_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -137,7 +138,8 @@
 
                     <include
                         android:id="@+id/view_user_detail_loading"
-                        layout="@layout/view_user_detail_loading" />
+                        layout="@layout/view_user_detail_loading"
+                        android:visibility="gone" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -159,4 +161,8 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <include
+        android:id="@+id/view_error_detail"
+        layout="@layout/view_error" />
 </LinearLayout>

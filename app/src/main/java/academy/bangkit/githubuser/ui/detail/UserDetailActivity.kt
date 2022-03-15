@@ -4,7 +4,6 @@ import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.TabAdapter
 import academy.bangkit.githubuser.databinding.ActivityUserDetailBinding
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
@@ -15,7 +14,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import java.lang.StringBuilder
 
 class UserDetailActivity : AppCompatActivity() {
 
@@ -32,6 +30,7 @@ class UserDetailActivity : AppCompatActivity() {
         initUserDetail()
         initTabLayout()
         showLoading()
+        showError()
     }
 
     private fun initToolbar() {
@@ -69,7 +68,7 @@ class UserDetailActivity : AppCompatActivity() {
 
                 if (description.isNotEmpty()) {
                     detailTvDescription.text = description
-                }else{
+                } else {
                     detailTvDescription.visibility = View.GONE
                 }
 
@@ -90,11 +89,25 @@ class UserDetailActivity : AppCompatActivity() {
 
     private fun showLoading() {
         userDetailViewModel.isLoading.observe(this) { isLoading ->
-            with(binding) {
+            with(binding.viewUserDetailLoading) {
                 if (isLoading) {
-                    viewUserDetailLoading.root.visibility = View.VISIBLE
+                    root.visibility = View.VISIBLE
                 } else {
-                    viewUserDetailLoading.root.visibility = View.GONE
+                    root.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    private fun showError() {
+        userDetailViewModel.isError.observe(this) { isError ->
+            with(binding) {
+                if (isError) {
+                    containerUserDetail.visibility = View.GONE
+                    viewErrorDetail.root.visibility = View.VISIBLE
+                }else{
+                    containerUserDetail.visibility = View.VISIBLE
+                    viewErrorDetail.root.visibility = View.GONE
                 }
             }
         }
