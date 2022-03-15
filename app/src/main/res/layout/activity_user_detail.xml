@@ -31,12 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +44,7 @@
                     android:background="@color/prussian_blue"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/detail_img_avatar"
