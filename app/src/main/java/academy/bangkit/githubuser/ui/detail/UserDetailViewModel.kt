@@ -15,7 +15,7 @@ class UserDetailViewModel : ViewModel() {
     private val tokenApi = BuildConfig.API_KEY
     private val userDetail = MutableLiveData<UserDetail>()
 
-    private val _isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     private val _isError = MutableLiveData<Boolean>()
@@ -25,8 +25,6 @@ class UserDetailViewModel : ViewModel() {
     val message: LiveData<Event<String>> get() = _message
 
     fun setUserDetail(username: String) {
-        _isLoading.postValue(true)
-
         val client = ApiConfig.getApiService().getUserDetail(username, "token $tokenApi")
         client.enqueue(object : Callback<UserDetail> {
             override fun onResponse(call: Call<UserDetail>, response: Response<UserDetail>) {

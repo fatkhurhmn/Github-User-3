@@ -4,7 +4,6 @@ import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.TabAdapter
 import academy.bangkit.githubuser.databinding.ActivityUserDetailBinding
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
@@ -105,7 +104,7 @@ class UserDetailActivity : AppCompatActivity() {
                 if (isError) {
                     containerUserDetail.visibility = View.GONE
                     viewErrorDetail.root.visibility = View.VISIBLE
-                } else {
+                }else{
                     containerUserDetail.visibility = View.VISIBLE
                     viewErrorDetail.root.visibility = View.GONE
                 }
