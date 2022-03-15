@@ -33,6 +33,7 @@ class FollowersFragment : Fragment() {
         initListFollowers()
         showListFollowers()
         showLoading()
+        showNoFollowers()
     }
 
     private fun setListFollowers() {
@@ -65,6 +66,18 @@ class FollowersFragment : Fragment() {
                     root.visibility = View.VISIBLE
                 } else {
                     root.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    private fun showNoFollowers() {
+        followersViewModel.isNoFollowers.observe(viewLifecycleOwner) { isNoFollowers ->
+            with(binding) {
+                if (isNoFollowers) {
+                    detailTvNoFollowers.visibility = View.VISIBLE
+                } else {
+                    detailTvNoFollowers.visibility = View.GONE
                 }
             }
         }

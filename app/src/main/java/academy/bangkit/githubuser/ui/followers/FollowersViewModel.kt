@@ -18,6 +18,9 @@ class FollowersViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
+    private val _isNoFollowers = MutableLiveData<Boolean>()
+    val isNoFollowers: LiveData<Boolean> get() = _isNoFollowers
+
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> get() = _isError
 
@@ -34,6 +37,7 @@ class FollowersViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     _isError.postValue(false)
                     response.body()?.apply {
+                        _isNoFollowers.postValue(isEmpty())
                         listFollowers.postValue(this as ArrayList<User>)
                     }
                 }

@@ -16,8 +16,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/user_item" />
 
+    <TextView
+        android:id="@+id/detail_tv_no_following"
+        style="@style/Text.Value.Medium.Small"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/no_following"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <include
         android:id="@+id/view_loading_following"
-        layout="@layout/view_list_loading" />
+        layout="@layout/view_list_loading"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

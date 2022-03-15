@@ -18,6 +18,9 @@ class FollowingViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
+    private val _isNoFollowing = MutableLiveData<Boolean>()
+    val isNoFollowing: LiveData<Boolean> get() = _isNoFollowing
+
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> get() = _isError
 
@@ -34,6 +37,7 @@ class FollowingViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     _isError.postValue(false)
                     response.body()?.apply {
+                        _isNoFollowing.postValue(isEmpty())
                         listFollowing.postValue(this as ArrayList<User>)
                     }
                 }
