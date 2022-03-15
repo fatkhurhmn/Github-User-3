@@ -4,6 +4,7 @@ import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.TabAdapter
 import academy.bangkit.githubuser.databinding.ActivityUserDetailBinding
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
