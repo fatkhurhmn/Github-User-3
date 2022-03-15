@@ -4,6 +4,8 @@ import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.TabAdapter
 import academy.bangkit.githubuser.databinding.ActivityUserDetailBinding
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
@@ -29,6 +31,7 @@ class UserDetailActivity : AppCompatActivity() {
         setUserDetail()
         initUserDetail()
         initTabLayout()
+        showLoading()
     }
 
     private fun initToolbar() {
@@ -52,22 +55,22 @@ class UserDetailActivity : AppCompatActivity() {
                 detailTvFollowing.text = getFormattedNumber(user.following)
                 detailTvRepository.text = getFormattedNumber(user.publicRepos)
 
-                val description = StringBuilder().apply {
-                    with(user) {
-                        if (location != null) {
-                            append(location)
-                        }
-                        if (company != null) {
-                            append("\n" + company)
-                        }
-                        if (blog != "") {
-                            append("\n" + blog)
-                        }
+                val listDesc = arrayListOf<String>()
+
+                with(user) {
+                    location?.let { listDesc.add(it) }
+                    company?.let { listDesc.add(it) }
+                    if (blog != "") {
+                        blog?.let { listDesc.add(it) }
                     }
                 }
 
+                val description = listDesc.joinToString("\n")
+
                 if (description.isNotEmpty()) {
                     detailTvDescription.text = description
+                }else{
+                    detailTvDescription.visibility = View.GONE
                 }
 
                 detailImgAvatar.loadImage(user.avatarUrl)
@@ -83,6 +86,18 @@ class UserDetailActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
+    }
+
+    private fun showLoading() {
+        userDetailViewModel.isLoading.observe(this) { isLoading ->
+            with(binding) {
+                if (isLoading) {
+                    viewUserDetailLoading.root.visibility = View.VISIBLE
+                } else {
+                    viewUserDetailLoading.root.visibility = View.GONE
+                }
+            }
+        }
     }
 
     private fun ImageView.loadImage(url: String) {

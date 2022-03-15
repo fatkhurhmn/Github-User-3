@@ -66,19 +66,19 @@
                         android:id="@+id/detail_tv_name"
                         style="@style/Text.Value.Medium.Small"
                         android:layout_marginTop="8dp"
-                        android:text="@string/name"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/detail_img_avatar" />
+                        app:layout_constraintTop_toBottomOf="@+id/detail_img_avatar"
+                        tools:text="@string/name" />
 
                     <TextView
                         android:id="@+id/detail_tv_description"
                         style="@style/Text.Value.Regular.Detail"
-                        android:text="@string/description"
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/detail_tv_name" />
+                        app:layout_constraintTop_toBottomOf="@+id/detail_tv_name"
+                        tools:text="@string/description" />
 
                     <TextView
                         android:id="@+id/follower_label"
@@ -110,29 +110,30 @@
                     <TextView
                         android:id="@+id/detail_tv_followers"
                         style="@style/Text.Number"
-                        android:text="@string/number"
-                        android:textColor="@color/white"
                         app:layout_constraintBottom_toTopOf="@+id/helper_line2"
                         app:layout_constraintEnd_toEndOf="@+id/follower_label"
-                        app:layout_constraintStart_toStartOf="@+id/follower_label" />
+                        app:layout_constraintStart_toStartOf="@+id/follower_label"
+                        tools:text="@string/number" />
 
                     <TextView
                         android:id="@+id/detail_tv_following"
                         style="@style/Text.Number"
-                        android:text="@string/number"
-                        android:textColor="@color/white"
                         app:layout_constraintBottom_toTopOf="@+id/helper_line2"
                         app:layout_constraintEnd_toEndOf="@+id/following_label"
-                        app:layout_constraintStart_toStartOf="@+id/following_label" />
+                        app:layout_constraintStart_toStartOf="@+id/following_label"
+                        tools:text="@string/number" />
 
                     <TextView
                         android:id="@+id/detail_tv_repository"
                         style="@style/Text.Number"
-                        android:text="@string/number"
-                        android:textColor="@color/white"
                         app:layout_constraintBottom_toTopOf="@+id/helper_line2"
                         app:layout_constraintEnd_toEndOf="@+id/repository_label"
-                        app:layout_constraintStart_toStartOf="@+id/repository_label" />
+                        app:layout_constraintStart_toStartOf="@+id/repository_label"
+                        tools:text="@string/number" />
+
+                    <include
+                        android:id="@+id/view_user_detail_loading"
+                        layout="@layout/user_detail_loading" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
