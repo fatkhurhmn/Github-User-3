@@ -1,13 +1,11 @@
 package academy.bangkit.githubuser.network
 
+import academy.bangkit.githubuser.BuildConfig
 import academy.bangkit.githubuser.model.SearchResponse
 import academy.bangkit.githubuser.model.User
 import academy.bangkit.githubuser.model.UserDetail
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
     @GET("/search/users")
@@ -17,17 +15,20 @@ interface ApiService {
     ): Call<SearchResponse>
 
     @GET("/users/{username}")
+    @Headers("Authorization: token <${BuildConfig.API_KEY}>")
     fun getUserDetail(
-        @Path("username") username: String
+        @Path("username") username: String,
     ): Call<UserDetail>
 
     @GET("/users/{username}/followers")
+    @Headers("Authorization: token <${BuildConfig.API_KEY}>")
     fun getUserFollowers(
-        @Path("username") username: String
+        @Path("username") username: String,
     ): Call<List<User>>
 
     @GET("/users/{username}/following")
+    @Headers("Authorization: token <${BuildConfig.API_KEY}>")
     fun getUserFollowing(
-        @Path("username") username: String
+        @Path("username") username: String,
     ): Call<List<User>>
 }
