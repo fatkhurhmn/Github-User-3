@@ -3,12 +3,16 @@ package academy.bangkit.githubuser.ui.detail
 import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.TabAdapter
 import academy.bangkit.githubuser.databinding.ActivityUserDetailBinding
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -16,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class UserDetailActivity : AppCompatActivity() {
+class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
 
     private lateinit var binding: ActivityUserDetailBinding
     private val userDetailViewModel by viewModels<UserDetailViewModel>()
@@ -40,6 +44,7 @@ class UserDetailActivity : AppCompatActivity() {
         with(binding.userDetailToolbar) {
             title = username
             setNavigationOnClickListener { onBackPressed() }
+            setOnMenuItemClickListener(this@UserDetailActivity)
         }
     }
 
@@ -121,6 +126,52 @@ class UserDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.btn_share -> {
+                shareContent()
+                true
+            }
+
+            R.id.btn_open -> {
+                openInBrowser()
+                true
+            }
+
+            else -> false
+        }
+    }
+
+    private fun shareContent() {
+        val username = intent.getStringExtra(EXTRA_USERNAME)
+
+        val message = resources.getString(
+            R.string.message,
+            binding.detailTvName.text,
+            username,
+            binding.detailTvFollowers.text,
+            binding.detailTvFollowing.text,
+            binding.detailTvRepository.text,
+        )
+
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, message)
+            type = "text/plain"
+        }
+
+        val intentShare = Intent.createChooser(sendIntent, null)
+        startActivity(intentShare)
+    }
+
+    private fun openInBrowser() {
+        val username = intent.getStringExtra(EXTRA_USERNAME)
+        val url = "https://www.github.com/$username"
+        val intentOpenInBrowser = Intent(Intent.ACTION_VIEW)
+        intentOpenInBrowser.data = Uri.parse(url)
+        startActivity(intentOpenInBrowser)
     }
 
     private fun ImageView.loadImage(url: String) {
