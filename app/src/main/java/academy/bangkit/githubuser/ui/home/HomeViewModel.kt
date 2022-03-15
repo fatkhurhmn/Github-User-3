@@ -13,6 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
+
     private val tokenApi = BuildConfig.API_KEY
     private val listUsers = MutableLiveData<ArrayList<User>>()
 

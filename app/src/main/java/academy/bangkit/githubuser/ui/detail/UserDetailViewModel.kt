@@ -12,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserDetailViewModel : ViewModel() {
+
     private val tokenApi = BuildConfig.API_KEY
     private val userDetail = MutableLiveData<UserDetail>()
 

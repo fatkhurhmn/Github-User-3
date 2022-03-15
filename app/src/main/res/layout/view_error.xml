@@ -12,6 +12,5 @@
         android:gravity="center"
         android:text="@string/there_is_an_error"
         app:drawableTopCompat="@drawable/ic_error" />
-
 </LinearLayout>
 

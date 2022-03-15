@@ -11,6 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FollowersViewModel : ViewModel() {
+
     private val tokenApi = BuildConfig.API_KEY
     private val listFollowers = MutableLiveData<ArrayList<User>>()
 
