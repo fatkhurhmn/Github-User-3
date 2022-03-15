@@ -32,6 +32,7 @@ class FollowingFragment : Fragment() {
         setListFollowers()
         initListFollowers()
         showListFollowers()
+        showLoading()
     }
 
     private fun setListFollowers() {
@@ -54,6 +55,18 @@ class FollowingFragment : Fragment() {
         with(binding.rvListFollowing) {
             layoutManager = LinearLayoutManager(context)
             adapter = userAdapter
+        }
+    }
+
+    private fun showLoading() {
+        followingViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            with(binding.viewLoadingFollowing) {
+                if (isLoading) {
+                    root.visibility = View.VISIBLE
+                } else {
+                    root.visibility = View.GONE
+                }
+            }
         }
     }
 
