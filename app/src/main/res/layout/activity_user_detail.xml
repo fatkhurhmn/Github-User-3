@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.detail.UserDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -22,94 +23,136 @@
             app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/prussian_blue"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/detail_img_avatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/detail_tv_name"
-            style="@style/Text.Value.Medium.Small"
-            android:layout_marginTop="8dp"
-            android:text="@string/name"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_img_avatar" />
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-        <TextView
-            android:id="@+id/detail_tv_description"
-            style="@style/Text.Value.Regular.Detail"
-            android:text="@string/description"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_tv_name" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/prussian_blue"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/follower_label"
-            style="@style/Text.Value.Regular.Detail"
-            android:layout_marginStart="0dp"
-            android:text="@string/follower"
-            app:layout_constraintBottom_toBottomOf="@+id/detail_img_avatar"
-            app:layout_constraintEnd_toStartOf="@+id/following_label"
-            app:layout_constraintStart_toEndOf="@id/detail_img_avatar"
-            app:layout_constraintTop_toTopOf="@+id/detail_img_avatar" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/detail_img_avatar"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/following_label"
-            style="@style/Text.Value.Regular.Detail"
-            android:layout_marginStart="0dp"
-            android:text="@string/following"
-            app:layout_constraintEnd_toStartOf="@+id/repository_label"
-            app:layout_constraintStart_toEndOf="@+id/follower_label"
-            app:layout_constraintTop_toTopOf="@+id/follower_label" />
+                    <View
+                        android:id="@+id/helper_line2"
+                        style="@style/HelperLine"
+                        app:layout_constraintBottom_toBottomOf="@id/detail_img_avatar"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/detail_img_avatar" />
 
-        <TextView
-            android:id="@+id/repository_label"
-            style="@style/Text.Value.Regular.Detail"
-            android:layout_marginStart="0dp"
-            android:text="@string/repository"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/following_label"
-            app:layout_constraintTop_toTopOf="@+id/follower_label" />
+                    <TextView
+                        android:id="@+id/detail_tv_name"
+                        style="@style/Text.Value.Medium.Small"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/name"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/detail_img_avatar" />
 
-        <TextView
-            android:id="@+id/detail_tv_followers"
-            style="@style/Text.Number"
-            android:text="@string/number"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/follower_label"
-            app:layout_constraintEnd_toEndOf="@+id/follower_label"
-            app:layout_constraintStart_toStartOf="@+id/follower_label" />
+                    <TextView
+                        android:id="@+id/detail_tv_description"
+                        style="@style/Text.Value.Regular.Detail"
+                        android:text="@string/description"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/detail_tv_name" />
 
-        <TextView
-            android:id="@+id/detail_tv_following"
-            style="@style/Text.Number"
-            android:text="@string/number"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/following_label"
-            app:layout_constraintEnd_toEndOf="@+id/following_label"
-            app:layout_constraintStart_toStartOf="@+id/following_label" />
+                    <TextView
+                        android:id="@+id/follower_label"
+                        style="@style/Text.Value.Regular.Detail"
+                        android:layout_marginStart="0dp"
+                        android:text="@string/followers"
+                        app:layout_constraintEnd_toStartOf="@+id/following_label"
+                        app:layout_constraintStart_toEndOf="@id/detail_img_avatar"
+                        app:layout_constraintTop_toBottomOf="@+id/helper_line2" />
 
-        <TextView
-            android:id="@+id/detail_tv_repository"
-            style="@style/Text.Number"
-            android:text="@string/number"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/repository_label"
-            app:layout_constraintEnd_toEndOf="@+id/repository_label"
-            app:layout_constraintStart_toStartOf="@+id/repository_label" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    <TextView
+                        android:id="@+id/following_label"
+                        style="@style/Text.Value.Regular.Detail"
+                        android:layout_marginStart="0dp"
+                        android:text="@string/following"
+                        app:layout_constraintEnd_toStartOf="@+id/repository_label"
+                        app:layout_constraintStart_toEndOf="@+id/follower_label"
+                        app:layout_constraintTop_toTopOf="@+id/follower_label" />
+
+                    <TextView
+                        android:id="@+id/repository_label"
+                        style="@style/Text.Value.Regular.Detail"
+                        android:layout_marginStart="0dp"
+                        android:text="@string/repository"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/following_label"
+                        app:layout_constraintTop_toTopOf="@+id/follower_label" />
+
+                    <TextView
+                        android:id="@+id/detail_tv_followers"
+                        style="@style/Text.Number"
+                        android:text="@string/number"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toTopOf="@+id/helper_line2"
+                        app:layout_constraintEnd_toEndOf="@+id/follower_label"
+                        app:layout_constraintStart_toStartOf="@+id/follower_label" />
+
+                    <TextView
+                        android:id="@+id/detail_tv_following"
+                        style="@style/Text.Number"
+                        android:text="@string/number"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toTopOf="@+id/helper_line2"
+                        app:layout_constraintEnd_toEndOf="@+id/following_label"
+                        app:layout_constraintStart_toStartOf="@+id/following_label" />
+
+                    <TextView
+                        android:id="@+id/detail_tv_repository"
+                        style="@style/Text.Number"
+                        android:text="@string/number"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toTopOf="@+id/helper_line2"
+                        app:layout_constraintEnd_toEndOf="@+id/repository_label"
+                        app:layout_constraintStart_toStartOf="@+id/repository_label" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/detail_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:colorPrimary"
+                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorHeight="4dp"
+                app:tabTextAppearance="@style/Text.Value.Medium.Small"
+                app:tabTextColor="@color/white" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/detail_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

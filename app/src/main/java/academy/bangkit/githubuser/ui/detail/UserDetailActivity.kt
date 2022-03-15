@@ -1,15 +1,18 @@
 package academy.bangkit.githubuser.ui.detail
 
 import academy.bangkit.githubuser.R
+import academy.bangkit.githubuser.adapter.TabAdapter
 import academy.bangkit.githubuser.databinding.ActivityUserDetailBinding
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import java.lang.StringBuilder
 
 class UserDetailActivity : AppCompatActivity() {
@@ -25,6 +28,7 @@ class UserDetailActivity : AppCompatActivity() {
         initToolbar()
         setUserDetail()
         initUserDetail()
+        initTabLayout()
     }
 
     private fun initToolbar() {
@@ -71,6 +75,16 @@ class UserDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun initTabLayout() {
+        val tabAdapter = TabAdapter(this)
+        val viewPager: ViewPager2 = binding.detailViewPager
+        viewPager.adapter = tabAdapter
+        val tabLayout: TabLayout = binding.detailTabLayout
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
+    }
+
     private fun ImageView.loadImage(url: String) {
         Glide.with(this.context)
             .load(url)
@@ -97,6 +111,11 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     companion object {
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            R.string.followers,
+            R.string.following,
+        )
         const val EXTRA_USERNAME = "extra username"
     }
 }
