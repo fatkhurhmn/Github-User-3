@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -31,6 +32,7 @@ class UserDetailActivity : AppCompatActivity() {
         initTabLayout()
         showLoading()
         showError()
+        showMessage()
     }
 
     private fun initToolbar() {
@@ -87,6 +89,14 @@ class UserDetailActivity : AppCompatActivity() {
         }.attach()
     }
 
+    private fun showMessage() {
+        userDetailViewModel.message.observe(this) {
+            it.getContentIfNotHandled()?.let { message ->
+                Snackbar.make(binding.detailContainer, message, Snackbar.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun showLoading() {
         userDetailViewModel.isLoading.observe(this) { isLoading ->
             with(binding.viewUserDetailLoading) {
@@ -105,7 +115,7 @@ class UserDetailActivity : AppCompatActivity() {
                 if (isError) {
                     containerUserDetail.visibility = View.GONE
                     viewErrorDetail.root.visibility = View.VISIBLE
-                }else{
+                } else {
                     containerUserDetail.visibility = View.VISIBLE
                     viewErrorDetail.root.visibility = View.GONE
                 }
