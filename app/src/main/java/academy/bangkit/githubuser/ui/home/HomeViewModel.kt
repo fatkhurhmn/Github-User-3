@@ -55,6 +55,7 @@ class HomeViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+                _isLoading.postValue(false)
                 _isError.postValue(true)
                 _message.postValue(Event(t.message!!))
             }
