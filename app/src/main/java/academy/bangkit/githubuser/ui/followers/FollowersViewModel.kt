@@ -1,5 +1,6 @@
 package academy.bangkit.githubuser.ui.followers
 
+import academy.bangkit.githubuser.BuildConfig
 import academy.bangkit.githubuser.model.User
 import academy.bangkit.githubuser.network.ApiConfig
 import academy.bangkit.githubuser.utils.Event
@@ -11,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FollowersViewModel : ViewModel() {
+    private val tokenApi = BuildConfig.API_KEY
     private val listFollowers = MutableLiveData<ArrayList<User>>()
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -25,7 +27,7 @@ class FollowersViewModel : ViewModel() {
     fun setUserFollowers(username: String) {
         _isLoading.postValue(true)
 
-        val client = ApiConfig.getApiService().getUserFollowers(username)
+        val client = ApiConfig.getApiService().getUserFollowers(username, "token $tokenApi")
         client.enqueue(object : Callback<List<User>> {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 _isLoading.postValue(false)

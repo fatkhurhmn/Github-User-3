@@ -15,20 +15,20 @@ interface ApiService {
     ): Call<SearchResponse>
 
     @GET("/users/{username}")
-    @Headers("Authorization: ${BuildConfig.API_KEY}")
     fun getUserDetail(
         @Path("username") username: String,
+        @Header("Authorization") token: String
     ): Call<UserDetail>
 
     @GET("/users/{username}/followers")
-    @Headers("Authorization: ${BuildConfig.API_KEY}")
     fun getUserFollowers(
         @Path("username") username: String,
+        @Header("Authorization") token: String
     ): Call<List<User>>
 
     @GET("/users/{username}/following")
-    @Headers("Authorization: ${BuildConfig.API_KEY}")
     fun getUserFollowing(
         @Path("username") username: String,
+        @Header("Authorization") token: String
     ): Call<List<User>>
 }

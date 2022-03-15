@@ -133,7 +133,7 @@
 
                     <include
                         android:id="@+id/view_user_detail_loading"
-                        layout="@layout/user_detail_loading" />
+                        layout="@layout/view_user_detail_loading" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

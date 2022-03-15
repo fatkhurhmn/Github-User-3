@@ -1,5 +1,6 @@
 package academy.bangkit.githubuser.ui.detail
 
+import academy.bangkit.githubuser.BuildConfig
 import academy.bangkit.githubuser.model.UserDetail
 import academy.bangkit.githubuser.network.ApiConfig
 import academy.bangkit.githubuser.utils.Event
@@ -11,7 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserDetailViewModel : ViewModel() {
-
+    private val tokenApi = BuildConfig.API_KEY
     private val userDetail = MutableLiveData<UserDetail>()
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -26,7 +27,7 @@ class UserDetailViewModel : ViewModel() {
     fun setUserDetail(username: String) {
         _isLoading.postValue(true)
 
-        val client = ApiConfig.getApiService().getUserDetail(username)
+        val client = ApiConfig.getApiService().getUserDetail(username, "token $tokenApi")
         client.enqueue(object : Callback<UserDetail> {
             override fun onResponse(call: Call<UserDetail>, response: Response<UserDetail>) {
                 _isLoading.postValue(false)
