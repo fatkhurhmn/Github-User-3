@@ -65,9 +65,11 @@
                     <TextView
                         android:id="@+id/detail_tv_name"
                         style="@style/Text.Value.Medium.Small"
+                        android:layout_width="match_parent"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:lineSpacingMultiplier="0.8"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/detail_img_avatar"
                         tools:text="@string/name" />
@@ -75,6 +77,8 @@
                     <TextView
                         android:id="@+id/detail_tv_description"
                         style="@style/Text.Value.Regular.Detail"
+                        android:layout_width="match_parent"
+                        android:layout_marginEnd="16dp"
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/detail_tv_name"
