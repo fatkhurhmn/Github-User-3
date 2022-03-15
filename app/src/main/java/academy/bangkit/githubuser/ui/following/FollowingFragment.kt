@@ -16,7 +16,7 @@ class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
     private val followingViewModel by viewModels<FollowingViewModel>()
-    private val userAdapter: UserAdapter by lazy { UserAdapter() }
+    private val userAdapter: UserAdapter by lazy { UserAdapter(false) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

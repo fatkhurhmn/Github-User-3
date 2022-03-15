@@ -105,7 +105,7 @@ class UserDetailActivity : AppCompatActivity() {
                 if (isError) {
                     containerUserDetail.visibility = View.GONE
                     viewErrorDetail.root.visibility = View.VISIBLE
-                }else{
+                } else {
                     containerUserDetail.visibility = View.VISIBLE
                     viewErrorDetail.root.visibility = View.GONE
                 }

@@ -18,7 +18,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private val homeViewModel by viewModels<HomeViewModel>()
-    private val userAdapter: UserAdapter by lazy { UserAdapter() }
+    private val userAdapter: UserAdapter by lazy { UserAdapter(true) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
+class UserAdapter(private val isCanClick: Boolean) : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
 
     private var listUsers = ArrayList<User>()
     private lateinit var onItemClickCallback: OnItemClickCallback
@@ -39,8 +39,10 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
     override fun onBindViewHolder(holder: UserAdapter.ListViewHolder, position: Int) {
         val user = listUsers[position]
         holder.bind(user)
-        holder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(user)
+        if(isCanClick){
+            holder.itemView.setOnClickListener {
+                onItemClickCallback.onItemClicked(user)
+            }
         }
     }
 
