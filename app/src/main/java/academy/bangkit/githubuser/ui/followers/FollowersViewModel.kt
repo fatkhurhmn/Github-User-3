@@ -14,10 +14,10 @@ class FollowersViewModel : ViewModel() {
     private val tokenApi = BuildConfig.API_KEY
     private val listFollowers = MutableLiveData<ArrayList<User>>()
 
-    private val _isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> get() = _isLoading
 
-    private val _isNoFollowers = MutableLiveData(true)
+    private val _isNoFollowers = MutableLiveData<Boolean>()
     val isNoFollowers: LiveData<Boolean> get() = _isNoFollowers
 
     private val _isError = MutableLiveData<Boolean>()
