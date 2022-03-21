@@ -25,7 +25,7 @@ class FollowingViewModel : ViewModel() {
     val isError: LiveData<Boolean> get() = _isError
 
     fun setUsersFollowing(username: String) {
-        val client = ApiConfig.getApiService().getUserFollowing(username, "token $tokenApi")
+        val client = ApiConfig.getApiService().getUserFollowing(username, tokenApi)
         client.enqueue(object : Callback<List<User>> {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 _isLoading.postValue(false)

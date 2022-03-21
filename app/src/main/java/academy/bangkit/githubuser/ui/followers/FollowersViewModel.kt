@@ -25,7 +25,7 @@ class FollowersViewModel : ViewModel() {
     val isError: LiveData<Boolean> get() = _isError
 
     fun setUserFollowers(username: String) {
-        val client = ApiConfig.getApiService().getUserFollowers(username, "token $tokenApi")
+        val client = ApiConfig.getApiService().getUserFollowers(username, tokenApi)
         client.enqueue(object : Callback<List<User>> {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 _isLoading.postValue(false)

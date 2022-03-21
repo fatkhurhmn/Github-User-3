@@ -26,7 +26,7 @@ class UserDetailViewModel : ViewModel() {
     val message: LiveData<Event<String>> get() = _message
 
     fun setUserDetail(username: String) {
-        val client = ApiConfig.getApiService().getUserDetail(username, "token $tokenApi")
+        val client = ApiConfig.getApiService().getUserDetail(username, tokenApi)
         client.enqueue(object : Callback<UserDetail> {
             override fun onResponse(call: Call<UserDetail>, response: Response<UserDetail>) {
                 _isLoading.postValue(false)
