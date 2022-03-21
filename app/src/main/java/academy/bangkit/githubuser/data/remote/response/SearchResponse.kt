@@ -9,5 +9,5 @@ import kotlinx.parcelize.Parcelize
 data class SearchResponse(
 
     @field:SerializedName("items")
-    val users: List<User>,
+    val users: List<UserResponse>,
 ) : Parcelable

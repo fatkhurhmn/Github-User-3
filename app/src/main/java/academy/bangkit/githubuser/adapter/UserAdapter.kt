@@ -2,7 +2,7 @@ package academy.bangkit.githubuser.adapter
 
 import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.databinding.UserItemBinding
-import academy.bangkit.githubuser.data.remote.response.User
+import academy.bangkit.githubuser.data.remote.response.UserResponse
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,11 +14,11 @@ import com.bumptech.glide.request.RequestOptions
 class UserAdapter(private val isCanClick: Boolean) :
     RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
 
-    private var listUsers = ArrayList<User>()
+    private var listUsers = ArrayList<UserResponse>()
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setUser(listUsers: ArrayList<User>) {
+    fun setUser(listUsers: ArrayList<UserResponse>) {
         with(this.listUsers) {
             clear()
             addAll(listUsers)
@@ -50,7 +50,7 @@ class UserAdapter(private val isCanClick: Boolean) :
 
     inner class ListViewHolder(private val binding: UserItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: User) {
+        fun bind(user: UserResponse) {
             with(binding) {
                 tvItemUsername.text = user.username
                 tvItemId.text = itemView.resources.getString(R.string.id_user, user.id.toString())
@@ -68,6 +68,6 @@ class UserAdapter(private val isCanClick: Boolean) :
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(user: User)
+        fun onItemClicked(user: UserResponse)
     }
 }

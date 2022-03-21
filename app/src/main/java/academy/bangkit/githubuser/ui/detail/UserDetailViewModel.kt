@@ -1,7 +1,7 @@
 package academy.bangkit.githubuser.ui.detail
 
 import academy.bangkit.githubuser.BuildConfig
-import academy.bangkit.githubuser.data.remote.response.UserDetail
+import academy.bangkit.githubuser.data.remote.response.UserDetailResponse
 import academy.bangkit.githubuser.data.remote.retrofit.ApiConfig
 import academy.bangkit.githubuser.utils.Event
 import androidx.lifecycle.LiveData
@@ -14,7 +14,7 @@ import retrofit2.Response
 class UserDetailViewModel : ViewModel() {
 
     private val tokenApi = BuildConfig.API_KEY
-    private val userDetail = MutableLiveData<UserDetail>()
+    private val userDetail = MutableLiveData<UserDetailResponse>()
 
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -27,8 +27,8 @@ class UserDetailViewModel : ViewModel() {
 
     fun setUserDetail(username: String) {
         val client = ApiConfig.getApiService().getUserDetail(username, tokenApi)
-        client.enqueue(object : Callback<UserDetail> {
-            override fun onResponse(call: Call<UserDetail>, response: Response<UserDetail>) {
+        client.enqueue(object : Callback<UserDetailResponse> {
+            override fun onResponse(call: Call<UserDetailResponse>, response: Response<UserDetailResponse>) {
                 _isLoading.postValue(false)
                 if (response.isSuccessful) {
                     _isError.postValue(false)
@@ -39,7 +39,7 @@ class UserDetailViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<UserDetail>, t: Throwable) {
+            override fun onFailure(call: Call<UserDetailResponse>, t: Throwable) {
                 _isLoading.postValue(false)
                 _isError.postValue(true)
                 _message.postValue(Event(t.message!!))
@@ -47,7 +47,7 @@ class UserDetailViewModel : ViewModel() {
         })
     }
 
-    fun getUserDetail(): LiveData<UserDetail> {
+    fun getUserDetail(): LiveData<UserDetailResponse> {
         return userDetail
     }
 }

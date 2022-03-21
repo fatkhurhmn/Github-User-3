@@ -1,8 +1,8 @@
 package academy.bangkit.githubuser.data.remote.retrofit
 
 import academy.bangkit.githubuser.data.remote.response.SearchResponse
-import academy.bangkit.githubuser.data.remote.response.User
-import academy.bangkit.githubuser.data.remote.response.UserDetail
+import academy.bangkit.githubuser.data.remote.response.UserResponse
+import academy.bangkit.githubuser.data.remote.response.UserDetailResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -20,17 +20,17 @@ interface ApiService {
     fun getUserDetail(
         @Path("username") username: String,
         @Header("Authorization") token: String
-    ): Call<UserDetail>
+    ): Call<UserDetailResponse>
 
     @GET("/users/{username}/followers")
     fun getUserFollowers(
         @Path("username") username: String,
         @Header("Authorization") token: String
-    ): Call<List<User>>
+    ): Call<List<UserResponse>>
 
     @GET("/users/{username}/following")
     fun getUserFollowing(
         @Path("username") username: String,
         @Header("Authorization") token: String
-    ): Call<List<User>>
+    ): Call<List<UserResponse>>
 }

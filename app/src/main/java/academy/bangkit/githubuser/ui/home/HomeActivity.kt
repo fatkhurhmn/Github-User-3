@@ -2,7 +2,7 @@ package academy.bangkit.githubuser.ui.home
 
 import academy.bangkit.githubuser.adapter.UserAdapter
 import academy.bangkit.githubuser.databinding.ActivityHomeBinding
-import academy.bangkit.githubuser.data.remote.response.User
+import academy.bangkit.githubuser.data.remote.response.UserResponse
 import academy.bangkit.githubuser.ui.detail.UserDetailActivity
 import android.content.Intent
 import android.os.Bundle
@@ -72,7 +72,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun navigateToUserDetail() {
         userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
-            override fun onItemClicked(user: User) {
+            override fun onItemClicked(user: UserResponse) {
                 val userDetailIntent = Intent(this@HomeActivity, UserDetailActivity::class.java)
                 userDetailIntent.putExtra(UserDetailActivity.EXTRA_USERNAME, user.username)
                 startActivity(userDetailIntent)

@@ -2,7 +2,7 @@ package academy.bangkit.githubuser.ui.home
 
 import academy.bangkit.githubuser.BuildConfig
 import academy.bangkit.githubuser.data.remote.response.SearchResponse
-import academy.bangkit.githubuser.data.remote.response.User
+import academy.bangkit.githubuser.data.remote.response.UserResponse
 import academy.bangkit.githubuser.data.remote.retrofit.ApiConfig
 import academy.bangkit.githubuser.utils.Event
 import androidx.lifecycle.LiveData
@@ -15,7 +15,7 @@ import retrofit2.Response
 class HomeViewModel : ViewModel() {
 
     private val tokenApi = BuildConfig.API_KEY
-    private val listUsers = MutableLiveData<ArrayList<User>>()
+    private val listUsers = MutableLiveData<ArrayList<UserResponse>>()
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -47,7 +47,7 @@ class HomeViewModel : ViewModel() {
                     _isError.postValue(false)
                     response.body()?.users?.apply {
                         _isNoResult.postValue(isEmpty())
-                        listUsers.postValue(this as ArrayList<User>)
+                        listUsers.postValue(this as ArrayList<UserResponse>)
                     }
                 } else {
                     _isError.postValue(true)
@@ -63,7 +63,7 @@ class HomeViewModel : ViewModel() {
         })
     }
 
-    fun getListUsers(): LiveData<ArrayList<User>> {
+    fun getListUsers(): LiveData<ArrayList<UserResponse>> {
         return listUsers
     }
 }

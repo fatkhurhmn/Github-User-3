@@ -1,7 +1,7 @@
 package academy.bangkit.githubuser.ui.followers
 
 import academy.bangkit.githubuser.BuildConfig
-import academy.bangkit.githubuser.data.remote.response.User
+import academy.bangkit.githubuser.data.remote.response.UserResponse
 import academy.bangkit.githubuser.data.remote.retrofit.ApiConfig
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import retrofit2.Response
 class FollowersViewModel : ViewModel() {
 
     private val tokenApi = BuildConfig.API_KEY
-    private val listFollowers = MutableLiveData<ArrayList<User>>()
+    private val listFollowers = MutableLiveData<ArrayList<UserResponse>>()
 
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -26,26 +26,26 @@ class FollowersViewModel : ViewModel() {
 
     fun setUserFollowers(username: String) {
         val client = ApiConfig.getApiService().getUserFollowers(username, tokenApi)
-        client.enqueue(object : Callback<List<User>> {
-            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+        client.enqueue(object : Callback<List<UserResponse>> {
+            override fun onResponse(call: Call<List<UserResponse>>, response: Response<List<UserResponse>>) {
                 _isLoading.postValue(false)
                 if (response.isSuccessful) {
                     _isError.postValue(false)
                     response.body()?.apply {
                         _isNoFollowers.postValue(isEmpty())
-                        listFollowers.postValue(this as ArrayList<User>)
+                        listFollowers.postValue(this as ArrayList<UserResponse>)
                     }
                 }
             }
 
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+            override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
                 _isLoading.postValue(false)
                 _isError.postValue(true)
             }
         })
     }
 
-    fun getUserFollowers(): LiveData<ArrayList<User>> {
+    fun getUserFollowers(): LiveData<ArrayList<UserResponse>> {
         return listFollowers
     }
 }
