@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import academy.bangkit.githubuser.adapter.UserAdapter
+import academy.bangkit.githubuser.data.remote.response.UserResponse
 import academy.bangkit.githubuser.databinding.FragmentFollowingBinding
 import academy.bangkit.githubuser.ui.detail.UserDetailActivity
 import androidx.fragment.app.viewModels
@@ -38,9 +39,11 @@ class FollowingFragment : Fragment() {
     }
 
     private fun setListFollowers() {
-        val username =
-            (activity as UserDetailActivity).intent.getStringExtra(UserDetailActivity.EXTRA_USERNAME)
-        username?.let { followingViewModel.setUsersFollowing(it) }
+        val user =
+            (activity as UserDetailActivity).intent.getParcelableExtra<UserResponse>(
+                UserDetailActivity.EXTRA_USER
+            )
+        user?.username?.let { followingViewModel.setUsersFollowing(it) }
     }
 
     private fun initListFollowers() {

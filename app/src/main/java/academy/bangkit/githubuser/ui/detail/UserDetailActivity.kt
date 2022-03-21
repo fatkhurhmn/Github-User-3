@@ -2,7 +2,10 @@ package academy.bangkit.githubuser.ui.detail
 
 import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.TabAdapter
+import academy.bangkit.githubuser.data.local.entity.UserEntity
+import academy.bangkit.githubuser.data.remote.response.UserResponse
 import academy.bangkit.githubuser.databinding.ActivityUserDetailBinding
+import academy.bangkit.githubuser.utils.ViewModelFactory
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -11,10 +14,10 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -25,12 +28,15 @@ import com.google.android.material.tabs.TabLayoutMediator
 class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
 
     private lateinit var binding: ActivityUserDetailBinding
-    private val userDetailViewModel by viewModels<UserDetailViewModel>()
+    private lateinit var userDetailViewModel: UserDetailViewModel
+    private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userDetailViewModel = obtainViewModel(this)
 
         initToolbar()
         setUserDetail()
@@ -42,18 +48,23 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
         showMessage()
     }
 
+    private fun obtainViewModel(activity: AppCompatActivity): UserDetailViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(UserDetailViewModel::class.java)
+    }
+
     private fun initToolbar() {
-        val username = intent.getStringExtra(EXTRA_USERNAME)
+        val user = intent.getParcelableExtra<UserResponse>(EXTRA_USER)
         with(binding.userDetailToolbar) {
-            title = username
+            title = user?.username
             setNavigationOnClickListener { onBackPressed() }
             setOnMenuItemClickListener(this@UserDetailActivity)
         }
     }
 
     private fun setUserDetail() {
-        val username = intent.getStringExtra(EXTRA_USERNAME)
-        username?.let { userDetailViewModel.setUserDetail(it) }
+        val user = intent.getParcelableExtra<UserResponse>(EXTRA_USER)
+        user?.username?.let { userDetailViewModel.setUserDetail(it) }
     }
 
     private fun initUserDetail() {
@@ -98,8 +109,32 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
     }
 
     private fun setFavoriteAction() {
-        binding.fabFavorite.setOnClickListener {
-            Snackbar.make(binding.detailContainer, "Favorite", Snackbar.LENGTH_SHORT).show()
+        val userResponse = intent.getParcelableExtra<UserResponse>(EXTRA_USER)
+        val user = UserEntity().apply {
+            id = userResponse?.id
+            username = userResponse?.username
+            photo = userResponse?.avatarUrl
+        }
+
+        userDetailViewModel.isFavoriteUser(user.id!!).observe(this) { isFavorite ->
+            this.isFavorite = isFavorite
+            binding.fabFavorite.imageTintList = if (isFavorite) {
+                binding.fabFavorite.setImageResource(R.drawable.ic_favorite)
+                ColorStateList.valueOf(Color.rgb(255, 74, 74))
+            } else {
+                binding.fabFavorite.setImageResource(R.drawable.ic_not_favorite)
+                ColorStateList.valueOf(Color.rgb(255, 255, 255))
+            }
+        }
+
+        binding.fabFavorite.apply {
+            setOnClickListener {
+                if (isFavorite) {
+                    userDetailViewModel.deleteFavorite(user)
+                } else {
+                    userDetailViewModel.addToFavorite(user)
+                }
+            }
         }
     }
 
@@ -154,12 +189,12 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
     }
 
     private fun shareContent() {
-        val username = intent.getStringExtra(EXTRA_USERNAME)
+        val user = intent.getParcelableExtra<UserResponse>(EXTRA_USER)
 
         val message = resources.getString(
             R.string.message,
             binding.detailTvName.text,
-            username,
+            user?.username,
             binding.detailTvFollowers.text,
             binding.detailTvFollowing.text,
             binding.detailTvRepository.text,
@@ -176,8 +211,8 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
     }
 
     private fun openInBrowser() {
-        val username = intent.getStringExtra(EXTRA_USERNAME)
-        val url = "https://www.github.com/$username"
+        val user = intent.getParcelableExtra<UserResponse>(EXTRA_USER)
+        val url = "https://www.github.com/${user?.username}"
         val intentOpenInBrowser = Intent(Intent.ACTION_VIEW)
         intentOpenInBrowser.data = Uri.parse(url)
         startActivity(intentOpenInBrowser)
@@ -214,6 +249,6 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
             R.string.followers,
             R.string.following,
         )
-        const val EXTRA_USERNAME = "extra username"
+        const val EXTRA_USER = "extra user"
     }
 }
