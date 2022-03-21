@@ -2,7 +2,7 @@ package academy.bangkit.githubuser.adapter
 
 import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.databinding.UserItemBinding
-import academy.bangkit.githubuser.model.User
+import academy.bangkit.githubuser.data.remote.response.User
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,9 +1,9 @@
 package academy.bangkit.githubuser.ui.home
 
 import academy.bangkit.githubuser.BuildConfig
-import academy.bangkit.githubuser.model.SearchResponse
-import academy.bangkit.githubuser.model.User
-import academy.bangkit.githubuser.network.ApiConfig
+import academy.bangkit.githubuser.data.remote.response.SearchResponse
+import academy.bangkit.githubuser.data.remote.response.User
+import academy.bangkit.githubuser.data.remote.retrofit.ApiConfig
 import academy.bangkit.githubuser.utils.Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -4,6 +4,8 @@ import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.TabAdapter
 import academy.bangkit.githubuser.databinding.ActivityUserDetailBinding
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
@@ -34,6 +36,7 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
         setUserDetail()
         initUserDetail()
         initTabLayout()
+        setFavoriteAction()
         showLoading()
         showError()
         showMessage()
@@ -94,10 +97,16 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
         }.attach()
     }
 
+    private fun setFavoriteAction() {
+        binding.fabFavorite.setOnClickListener {
+            Snackbar.make(binding.detailContainer, "Favorite", Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
     private fun showMessage() {
         userDetailViewModel.message.observe(this) {
             it.getContentIfNotHandled()?.let { message ->
-                Snackbar.make(binding.detailContainer, message, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
             }
         }
     }

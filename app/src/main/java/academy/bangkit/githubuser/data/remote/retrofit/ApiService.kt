@@ -1,8 +1,8 @@
-package academy.bangkit.githubuser.network
+package academy.bangkit.githubuser.data.remote.retrofit
 
-import academy.bangkit.githubuser.model.SearchResponse
-import academy.bangkit.githubuser.model.User
-import academy.bangkit.githubuser.model.UserDetail
+import academy.bangkit.githubuser.data.remote.response.SearchResponse
+import academy.bangkit.githubuser.data.remote.response.User
+import academy.bangkit.githubuser.data.remote.response.UserDetail
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header

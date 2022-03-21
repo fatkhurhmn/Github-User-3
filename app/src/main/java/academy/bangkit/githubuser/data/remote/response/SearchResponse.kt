@@ -1,4 +1,4 @@
-package academy.bangkit.githubuser.model
+package academy.bangkit.githubuser.data.remote.response
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

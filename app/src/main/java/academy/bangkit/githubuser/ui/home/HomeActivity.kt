@@ -2,7 +2,7 @@ package academy.bangkit.githubuser.ui.home
 
 import academy.bangkit.githubuser.adapter.UserAdapter
 import academy.bangkit.githubuser.databinding.ActivityHomeBinding
-import academy.bangkit.githubuser.model.User
+import academy.bangkit.githubuser.data.remote.response.User
 import academy.bangkit.githubuser.ui.detail.UserDetailActivity
 import android.content.Intent
 import android.os.Bundle

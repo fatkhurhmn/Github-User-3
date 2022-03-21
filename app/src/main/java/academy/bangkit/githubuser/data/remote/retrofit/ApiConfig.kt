@@ -1,4 +1,4 @@
-package academy.bangkit.githubuser.network
+package academy.bangkit.githubuser.data.remote.retrofit
 
 import academy.bangkit.githubuser.BuildConfig
 import okhttp3.OkHttpClient
