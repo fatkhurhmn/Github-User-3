@@ -175,12 +175,12 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.btn_share -> {
-                shareContent()
+                if (binding.viewErrorDetail.root.visibility == View.GONE) shareContent()
                 true
             }
 
             R.id.btn_open -> {
-                openInBrowser()
+                if (binding.viewErrorDetail.root.visibility == View.GONE) openInBrowser()
                 true
             }
 
