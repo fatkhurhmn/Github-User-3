@@ -39,7 +39,6 @@ class FavoriteActivity : AppCompatActivity() {
                     username = favorite.username!!,
                     avatarUrl = favorite.photo!!
                 )
-                favorites.clear()
                 favorites.add(user)
             }
             with(binding) {
@@ -76,5 +75,10 @@ class FavoriteActivity : AppCompatActivity() {
                 startActivity(userDetailIntent)
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getFavoriteUser()
     }
 }

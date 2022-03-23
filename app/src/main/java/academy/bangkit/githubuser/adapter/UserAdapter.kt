@@ -1,12 +1,13 @@
 package academy.bangkit.githubuser.adapter
 
 import academy.bangkit.githubuser.R
-import academy.bangkit.githubuser.databinding.UserItemBinding
 import academy.bangkit.githubuser.data.remote.response.UserResponse
-import android.annotation.SuppressLint
+import academy.bangkit.githubuser.databinding.UserItemBinding
+import academy.bangkit.githubuser.utils.UserDiffCallback
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -17,13 +18,15 @@ class UserAdapter(private val isCanClick: Boolean) :
     private var listUsers = ArrayList<UserResponse>()
     private lateinit var onItemClickCallback: OnItemClickCallback
 
-    @SuppressLint("NotifyDataSetChanged")
+
     fun setUser(listUsers: ArrayList<UserResponse>) {
+        val diffCallback = UserDiffCallback(this.listUsers, listUsers)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         with(this.listUsers) {
             clear()
             addAll(listUsers)
         }
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
