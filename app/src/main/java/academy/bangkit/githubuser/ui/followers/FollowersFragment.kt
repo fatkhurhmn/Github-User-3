@@ -58,6 +58,7 @@ class FollowersFragment : Fragment() {
         with(binding.rvListFollowers) {
             layoutManager = LinearLayoutManager(context)
             adapter = userAdapter
+            setHasFixedSize(true)
         }
     }
 

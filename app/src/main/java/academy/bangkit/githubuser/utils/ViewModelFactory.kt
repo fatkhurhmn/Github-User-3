@@ -1,6 +1,7 @@
 package academy.bangkit.githubuser.utils
 
 import academy.bangkit.githubuser.ui.detail.UserDetailViewModel
+import academy.bangkit.githubuser.ui.favorite.FavoriteViewModel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,8 @@ class ViewModelFactory private constructor(private val application: Application)
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UserDetailViewModel::class.java)) {
             return UserDetailViewModel(application) as T
+        }else if(modelClass.isAssignableFrom(FavoriteViewModel::class.java)){
+            return FavoriteViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class: " + modelClass.name)
     }

@@ -60,6 +60,7 @@ class FollowingFragment : Fragment() {
         with(binding.rvListFollowing) {
             layoutManager = LinearLayoutManager(context)
             adapter = userAdapter
+            setHasFixedSize(true)
         }
     }
 

@@ -22,7 +22,7 @@
             app:navigationIcon="@drawable/ic_back_arrow"
             app:popupTheme="@style/Theme.GitHubUser"
             app:title="@string/username"
-            app:titleTextAppearance="@style/Text.Value.Medium.Small"
+            app:titleTextAppearance="@style/Text.Value.Medium.Big"
             app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 

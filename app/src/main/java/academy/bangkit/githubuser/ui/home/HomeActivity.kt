@@ -4,7 +4,7 @@ import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.UserAdapter
 import academy.bangkit.githubuser.databinding.ActivityHomeBinding
 import academy.bangkit.githubuser.data.remote.response.UserResponse
-import academy.bangkit.githubuser.ui.FavoriteActivity
+import academy.bangkit.githubuser.ui.favorite.FavoriteActivity
 import academy.bangkit.githubuser.ui.detail.UserDetailActivity
 import android.content.Intent
 import android.os.Bundle
@@ -76,6 +76,7 @@ class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
         with(binding.rvListUsers) {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             adapter = userAdapter
+            setHasFixedSize(true)
         }
     }
 
