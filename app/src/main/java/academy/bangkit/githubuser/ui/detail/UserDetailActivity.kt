@@ -5,6 +5,7 @@ import academy.bangkit.githubuser.adapter.TabAdapter
 import academy.bangkit.githubuser.data.local.entity.UserEntity
 import academy.bangkit.githubuser.data.remote.response.UserResponse
 import academy.bangkit.githubuser.databinding.ActivityUserDetailBinding
+import academy.bangkit.githubuser.utils.ExtensionFunction.loadImage
 import academy.bangkit.githubuser.utils.ViewModelFactory
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -216,14 +217,6 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
         val intentOpenInBrowser = Intent(Intent.ACTION_VIEW)
         intentOpenInBrowser.data = Uri.parse(url)
         startActivity(intentOpenInBrowser)
-    }
-
-    private fun ImageView.loadImage(url: String) {
-        Glide.with(this.context)
-            .load(url)
-            .apply(RequestOptions().override(500, 500).placeholder(R.drawable.ic_default_photo))
-            .centerCrop()
-            .into(this)
     }
 
     private fun getFormattedNumber(number: Int): String {

@@ -3,14 +3,12 @@ package academy.bangkit.githubuser.adapter
 import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.data.remote.response.UserResponse
 import academy.bangkit.githubuser.databinding.UserItemBinding
+import academy.bangkit.githubuser.utils.ExtensionFunction.loadImage
 import academy.bangkit.githubuser.utils.UserDiffCallback
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 class UserAdapter(private val isCanClick: Boolean) :
     RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
@@ -60,14 +58,6 @@ class UserAdapter(private val isCanClick: Boolean) :
                 imgItemPhoto.loadImage(user.avatarUrl)
             }
         }
-    }
-
-    fun ImageView.loadImage(url: String) {
-        Glide.with(this.context)
-            .load(url)
-            .apply(RequestOptions().override(500, 500).placeholder(R.drawable.ic_default_photo))
-            .centerCrop()
-            .into(this)
     }
 
     interface OnItemClickCallback {
