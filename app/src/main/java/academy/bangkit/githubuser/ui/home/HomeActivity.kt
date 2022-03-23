@@ -1,19 +1,23 @@
 package academy.bangkit.githubuser.ui.home
 
+import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.UserAdapter
 import academy.bangkit.githubuser.databinding.ActivityHomeBinding
 import academy.bangkit.githubuser.data.remote.response.UserResponse
+import academy.bangkit.githubuser.ui.FavoriteActivity
 import academy.bangkit.githubuser.ui.detail.UserDetailActivity
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
 
     private lateinit var binding: ActivityHomeBinding
     private val homeViewModel by viewModels<HomeViewModel>()
@@ -24,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initToolbar()
         searchUser()
         initListUsers()
         showListUsers()
@@ -33,6 +38,10 @@ class HomeActivity : AppCompatActivity() {
         showNoResult()
         showError()
         showMessage()
+    }
+
+    private fun initToolbar() {
+        binding.homeToolbar.setOnMenuItemClickListener(this)
     }
 
     private fun searchUser() {
@@ -138,4 +147,18 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.btn_favorite -> {
+                val favoriteIntent = Intent(this, FavoriteActivity::class.java)
+                startActivity(favoriteIntent)
+                true
+            }
+
+            else -> false
+        }
+    }
+
+
 }

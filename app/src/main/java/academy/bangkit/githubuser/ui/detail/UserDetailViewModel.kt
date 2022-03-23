@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserDetailViewModel(private val application: Application) : ViewModel() {
+class UserDetailViewModel(application: Application) : ViewModel() {
 
     private val userRepository: UserRepository = UserRepository(application)
 

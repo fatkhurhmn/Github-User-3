@@ -20,4 +20,5 @@
     <string name="message">%s (id: %s) sudah memiliki pengikut di GitHub sebanyak %s akun dan mengikuti sebanyak %s akun. Hingga kini Repository-nya di GitHub sudah %s</string>
     <string name="by_fatkhu">By Fatkhu</string>
     <string name="icon_favorite">icon favorite</string>
+    <string name="favorite">Favorite</string>
 </resources>
