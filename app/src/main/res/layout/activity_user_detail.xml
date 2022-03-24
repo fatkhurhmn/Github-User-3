@@ -12,6 +12,7 @@
         android:id="@+id/user_detail_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:colorPrimary"
         app:liftOnScroll="true">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -34,6 +35,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?android:colorPrimary"
             android:fitsSystemWindows="false">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -44,7 +46,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/prussian_blue"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
