@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,7 @@ class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
     private lateinit var binding: ActivityHomeBinding
     private val homeViewModel by viewModels<HomeViewModel>()
     private val userAdapter: UserAdapter by lazy { UserAdapter(true) }
+    private var isDarkMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -157,9 +159,24 @@ class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
                 true
             }
 
+            R.id.btn_mode -> {
+                setTheme(item)
+                true
+            }
+
             else -> false
         }
     }
 
-
+    private fun setTheme(item: MenuItem) {
+        isDarkMode = if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            item.setIcon(R.drawable.ic_dark_mode)
+            false
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            item.setIcon(R.drawable.ic_light_mode)
+            true
+        }
+    }
 }
