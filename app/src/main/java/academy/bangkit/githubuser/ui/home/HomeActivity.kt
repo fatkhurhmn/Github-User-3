@@ -2,26 +2,35 @@ package academy.bangkit.githubuser.ui.home
 
 import academy.bangkit.githubuser.R
 import academy.bangkit.githubuser.adapter.UserAdapter
-import academy.bangkit.githubuser.databinding.ActivityHomeBinding
+import academy.bangkit.githubuser.data.local.datastore.SettingPreferences
 import academy.bangkit.githubuser.data.remote.response.UserResponse
-import academy.bangkit.githubuser.ui.favorite.FavoriteActivity
+import academy.bangkit.githubuser.databinding.ActivityHomeBinding
 import academy.bangkit.githubuser.ui.detail.UserDetailActivity
+import academy.bangkit.githubuser.ui.favorite.FavoriteActivity
+import academy.bangkit.githubuser.utils.PreferencesViewModelFactory
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+
+private val Context.dataStore: DataStore<androidx.datastore.preferences.core.Preferences> by preferencesDataStore(
+    name = "setting"
+)
 
 class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
 
     private lateinit var binding: ActivityHomeBinding
-    private val homeViewModel by viewModels<HomeViewModel>()
+    private lateinit var homeViewModel: HomeViewModel
     private val userAdapter: UserAdapter by lazy { UserAdapter(true) }
     private var isDarkMode = false
 
@@ -29,6 +38,12 @@ class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val pref = SettingPreferences.getInstance(dataStore)
+        homeViewModel = ViewModelProvider(
+            this,
+            PreferencesViewModelFactory(pref)
+        )[HomeViewModel::class.java]
 
         initToolbar()
         searchUser()
@@ -40,6 +55,7 @@ class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
         showNoResult()
         showError()
         showMessage()
+        getThemeSetting()
     }
 
     private fun initToolbar() {
@@ -160,7 +176,7 @@ class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
             }
 
             R.id.btn_mode -> {
-                setTheme(item)
+                homeViewModel.saveThemeSetting(isDarkMode)
                 true
             }
 
@@ -168,15 +184,15 @@ class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
         }
     }
 
-    private fun setTheme(item: MenuItem) {
-        isDarkMode = if (isDarkMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            item.setIcon(R.drawable.ic_dark_mode)
-            false
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            item.setIcon(R.drawable.ic_light_mode)
-            true
+    private fun getThemeSetting() {
+        homeViewModel.getThemeSetting().observe(this) { isDarkMode ->
+            if (isDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                this.isDarkMode = false
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                this.isDarkMode = true
+            }
         }
     }
 }

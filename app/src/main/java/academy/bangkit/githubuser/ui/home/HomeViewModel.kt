@@ -1,18 +1,18 @@
 package academy.bangkit.githubuser.ui.home
 
 import academy.bangkit.githubuser.BuildConfig
+import academy.bangkit.githubuser.data.local.datastore.SettingPreferences
 import academy.bangkit.githubuser.data.remote.response.SearchResponse
 import academy.bangkit.githubuser.data.remote.response.UserResponse
 import academy.bangkit.githubuser.data.remote.retrofit.ApiConfig
 import academy.bangkit.githubuser.utils.Event
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val pref: SettingPreferences) : ViewModel() {
 
     private val tokenApi = BuildConfig.API_KEY
     private val listUsers = MutableLiveData<ArrayList<UserResponse>>()
@@ -65,5 +65,15 @@ class HomeViewModel : ViewModel() {
 
     fun getListUsers(): LiveData<ArrayList<UserResponse>> {
         return listUsers
+    }
+
+    fun saveThemeSetting(isDarkMode: Boolean){
+        viewModelScope.launch {
+            pref.saveThemeSetting(isDarkMode)
+        }
+    }
+
+    fun getThemeSetting():LiveData<Boolean>{
+        return pref.getThemeSetting().asLiveData()
     }
 }

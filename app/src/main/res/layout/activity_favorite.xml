@@ -16,6 +16,7 @@
             android:id="@+id/home_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back_arrow"
             app:title="@string/favorite"
             app:titleTextAppearance="@style/Text.Value.Medium.Big"
             app:titleTextColor="@color/white" />
