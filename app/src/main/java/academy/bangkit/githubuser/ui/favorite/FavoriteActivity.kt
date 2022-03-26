@@ -25,10 +25,16 @@ class FavoriteActivity : AppCompatActivity() {
 
         favoriteViewModel = obtainViewModel(this)
 
+        initToolbar()
         getFavoriteUser()
         showListUsers()
         navigateToUserDetail()
     }
+
+    private fun initToolbar() {
+        binding.favoriteToolbar.setNavigationOnClickListener { onBackPressed() }
+    }
+
 
     private fun getFavoriteUser() {
         favoriteViewModel.getFavoriteUser().observe(this) { listFavorite ->
