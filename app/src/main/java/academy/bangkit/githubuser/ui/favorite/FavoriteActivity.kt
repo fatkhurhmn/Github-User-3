@@ -64,7 +64,7 @@ class FavoriteActivity : AppCompatActivity() {
 
     private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory).get(FavoriteViewModel::class.java)
+        return ViewModelProvider(activity, factory)[FavoriteViewModel::class.java]
     }
 
     private fun navigateToUserDetail() {

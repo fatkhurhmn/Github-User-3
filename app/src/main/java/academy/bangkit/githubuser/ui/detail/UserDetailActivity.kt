@@ -48,7 +48,7 @@ class UserDetailActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener 
 
     private fun obtainViewModel(activity: AppCompatActivity): UserDetailViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory).get(UserDetailViewModel::class.java)
+        return ViewModelProvider(activity, factory)[UserDetailViewModel::class.java]
     }
 
     private fun initToolbar() {
