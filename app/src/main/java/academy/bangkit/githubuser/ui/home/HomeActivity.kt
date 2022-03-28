@@ -188,9 +188,11 @@ class HomeActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
         homeViewModel.getThemeSetting().observe(this) { isDarkMode ->
             if (isDarkMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                binding.homeToolbar.menu.getItem(1).setIcon(R.drawable.ic_dark_mode)
                 this.isDarkMode = false
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                binding.homeToolbar.menu.getItem(1).setIcon(R.drawable.ic_light_mode)
                 this.isDarkMode = true
             }
         }
